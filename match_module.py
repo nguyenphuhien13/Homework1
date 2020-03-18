@@ -31,7 +31,7 @@ def find_best_match(model_images, query_images, dist_type, hist_type, num_bins):
     model_hists = compute_histograms(model_images, hist_type, hist_isgray, num_bins)
     query_hists = compute_histograms(query_images, hist_type, hist_isgray, num_bins)
     
-    D = np.zeros((len(model_images), len(query_images)))
+    D = np.zeros((len(query_images), len(model_images)))
     
     
     #... (your code here)
@@ -86,10 +86,10 @@ def show_neighbors(model_images, query_images, dist_type, hist_type, num_bins):
     best_match = best_match.astype(int)
 
     for i in range(len(query_images)):
-        plt.subplot(i+1,6,1); plt.imshow(np.array(Image.open(path+query_images[i])), vmin=0, vmax=255)
-        plt.subplot(i+1,6,2); plt.imshow(np.array(Image.open(path+model_images[best_match[i][0]])), vmin=0, vmax=255)
-        plt.subplot(i+1,6,3); plt.imshow(np.array(Image.open(path+model_images[best_match[i][1]])), vmin=0, vmax=255)
-        plt.subplot(i+1,6,4); plt.imshow(np.array(Image.open(path+model_images[best_match[i][2]])), vmin=0, vmax=255)
-        plt.subplot(i+1,6,5); plt.imshow(np.array(Image.open(path+model_images[best_match[i][3]])), vmin=0, vmax=255)
-        plt.subplot(i+1,6,6); plt.imshow(np.array(Image.open(path+model_images[best_match[i][4]])), vmin=0, vmax=255)
+        plt.subplot(i+1,6,1); plt.imshow(np.array(Image.open(query_images[i])), vmin=0, vmax=255)
+        plt.subplot(i+1,6,2); plt.imshow(np.array(Image.open(model_images[best_match[i][0]])), vmin=0, vmax=255)
+        plt.subplot(i+1,6,3); plt.imshow(np.array(Image.open(model_images[best_match[i][1]])), vmin=0, vmax=255)
+        plt.subplot(i+1,6,4); plt.imshow(np.array(Image.open(model_images[best_match[i][2]])), vmin=0, vmax=255)
+        plt.subplot(i+1,6,5); plt.imshow(np.array(Image.open(model_images[best_match[i][3]])), vmin=0, vmax=255)
+        plt.subplot(i+1,6,6); plt.imshow(np.array(Image.open(model_images[best_match[i][4]])), vmin=0, vmax=255)
         plt.show()
