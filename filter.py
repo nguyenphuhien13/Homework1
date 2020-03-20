@@ -3,6 +3,7 @@ import numpy as np
 from PIL import Image
 from scipy.signal import convolve2d as conv2
 import matplotlib.pyplot as plt
+import matplotlib.colors
 
 import gauss_module
 
@@ -18,19 +19,18 @@ def rgb2gray(rgb):
 
 
 ## function gauss (Question 1.a)
-print('Quesiton 1a')
 
 sigma = 4.0
 [Gx, x] = gauss_module.gauss(sigma)
+#print(Gx)
 
-plt.figure(1)
-plt.plot(x, Gx, '.-')
-plt.show()
+#plt.figure(1)
+#plt.plot(x, Gx, '.-')
+#plt.show()
 
 
 
 ## function gaussianfilter (Question 1.b)
-print('Question 1b')
 
 img = rgb2gray(np.array(Image.open('graf.png')))
 smooth_img = gauss_module.gaussianfilter(img, sigma)
@@ -47,7 +47,7 @@ plt.show()
 
 
 ## function gaussdx (Question 1.c)
-print('Question 1c')
+
 sigma = 4.0
 [Gx, x] = gauss_module.gauss(sigma)
 [Dx, x] = gauss_module.gaussdx(sigma)
@@ -61,7 +61,7 @@ plt.show()
 
 
 ## function gaussdx (Question 1.d)
-print('Question 1d')
+
 img_imp = np.zeros([27,27])
 img_imp[13, 13] = 1.0
 plt.figure(6), plt.imshow(img_imp, cmap='gray')
@@ -73,13 +73,16 @@ sigma = 7.0
 Gx = Gx.reshape(1, Gx.size)
 Dx = Dx.reshape(1, Dx.size)
 
+print(Gx)
+
+print("DX...........\n", Dx)
 plt.figure(7)
 plt.subplot(2,3,1)
 plt.imshow(conv2(conv2(img_imp, Gx, 'same'), Gx.T, 'same') , cmap='gray')
 plt.subplot(2,3,2)
-plt.imshow(conv2(conv2(img_imp, Gx, 'same'), Dx.T, 'same') , cmap='gray')
+plt.imshow(conv2(conv2(img_imp, Gx, 'same'), Dx.T, 'same') , cmap='Reds')
 plt.subplot(2,3,3)
-plt.imshow(conv2(conv2(img_imp, Dx.T, 'same'), Gx, 'same') , cmap='gray')
+plt.imshow(conv2(conv2(img_imp, Dx.T, 'same'), Gx, 'same') , cmap='Blues')
 plt.subplot(2,3,4)
 plt.imshow(conv2(conv2(img_imp, Dx, 'same'), Dx.T, 'same') , cmap='gray')
 plt.subplot(2,3,5)
@@ -89,9 +92,7 @@ plt.imshow(conv2(conv2(img_imp, Gx.T, 'same'), Dx, 'same') , cmap='gray')
 plt.show()
 
 
-
 ## function gaussderiv (Question 1.e)
-print('Question 1e')
 
 img_c = np.array(Image.open('graf.png')).astype('double')
 img = rgb2gray(img_c)
