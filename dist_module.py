@@ -18,9 +18,9 @@ def dist_intersect(x,y, normalized=False):
     sum_ = np.sum(np.minimum(x,y))
 
     if not normalized:
-        return 0.5*(sum_/np.sum(x) + sum_/np.sum(y))
+        return 1 - 0.5*(sum_/np.sum(x) + sum_/np.sum(y))
     else:
-        return sum_
+        return 1 - sum_
 
 
 
